@@ -1,0 +1,25 @@
+{
+  "name": "codex-fursona-pet-forge",
+  "version": "0.2.7+codex.20260604152841",
+  "description": "Create Codex desktop pet skins from a fursona reference image, with optional companion persona, memory, and break reminders.",
+  "author": {
+    "name": "Codex Fursona Pet Forge contributors"
+  },
+  "skills": "./skills/",
+  "hooks": "./hooks/hooks.json",
+  "interface": {
+    "displayName": "Codex Fursona Pet Forge",
+    "shortDescription": "Forge Codex pet skins from fursona art.",
+    "longDescription": "Create Codex desktop pet skins from a fursona reference image. The main workflow generates and validates pet action rows, QA previews, atlas files, and installable packages. Optional companion features let users configure pet naming, personality, memory, and break reminders.",
+    "developerName": "Codex Fursona Pet Forge contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Read",
+      "Write",
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "Help me make a Codex desktop pet skin from one fursona reference image, or configure the companion persona."
+    ]
+  }
+}

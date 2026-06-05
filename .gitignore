@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+.tmp/
+uv.lock
+.DS_Store
+.claude/
+.internal/
+tmp-spike/
+*.log
+*.bak
+*.backup
+*.tmp
+dist/
+build/
+*.egg-info/

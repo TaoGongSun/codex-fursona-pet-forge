@@ -1,0 +1,20 @@
+{
+  "name": "codex-fursona-local",
+  "interface": {
+    "displayName": "Codex Fursona Local"
+  },
+  "plugins": [
+    {
+      "name": "codex-fursona-pet-forge",
+      "source": {
+        "source": "local",
+        "path": "./plugins/codex-fursona-pet-forge"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

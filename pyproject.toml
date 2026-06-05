@@ -1,0 +1,24 @@
+[project]
+name = "codex-fursona-pet-forge"
+version = "0.2.7"
+requires-python = ">=3.11"
+dependencies = [
+  "Pillow>=12.0",
+  "PyYAML>=6.0",
+  "tomlkit>=0.12",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=8.0",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [
+  "plugins/codex-fursona-pet-forge/hooks",
+  "plugins/codex-fursona-pet-forge/scripts",
+  "plugins/codex-fursona-pet-forge/skills/remember-this",
+  "plugins/codex-fursona-pet-forge/skills/setup-action",
+  "plugins/codex-fursona-pet-forge/skills/stretch-reminder",
+]
