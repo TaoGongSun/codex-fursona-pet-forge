@@ -19,6 +19,7 @@ pythonpath = [
   "plugins/codex-fursona-pet-forge/hooks",
   "plugins/codex-fursona-pet-forge/scripts",
   "plugins/codex-fursona-pet-forge/skills/remember-this",
+  "plugins/codex-fursona-pet-forge/skills/make-pet-skin",
   "plugins/codex-fursona-pet-forge/skills/setup-action",
   "plugins/codex-fursona-pet-forge/skills/stretch-reminder",
 ]

@@ -50,6 +50,9 @@ Use this checklist before accepting a row or final package. The `make-pet-skin` 
 - `idle` is neither nearly static nor over-animated.
 - `idle` must not hide a one-frame semantic anatomy artifact such as duplicate tails or an extra appendage just because the motion is subtle.
 - `running-left` and `running-right` preserve identity and cadence.
+- Directional running is generated from three key poses and assembled as `12321232`, not generated as eight unrelated frames.
+- Repeated uses of the same directional-running key pose are pixel-identical.
+- Newly generated directional rows have a passing `qa/directional-running-adapter.json` report.
 - A derived `running-left` uses framewise mirror output from extracted `running-right` frames, or has an explicit non-mirror approval note.
 - A framewise mirror derivation proves every `running-left` frame equals the horizontal mirror of the matching `running-right` frame.
 - `jumping` reads as hover attention unless the user requested a literal jump.

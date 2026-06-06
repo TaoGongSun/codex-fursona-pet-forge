@@ -50,6 +50,25 @@ Use `hatch-pet` for visual generation, deterministic extraction, row QA, atlas c
 
 Keep long policy text out of image prompts. Use concise row prompts and let the reference docs plus `hatch-pet` own the detailed QA rules.
 
+For directional running, use the repo-local `directional_running_adapter.py` without modifying the installed `hatch-pet` skill. Immediately after `hatch-pet` prepares the run directory, adapt that run before invoking any directional row worker:
+
+```bash
+python "<make-pet-skin-skill-dir>/directional_running_adapter.py" prepare-run \
+  --run-dir "<run-dir>"
+```
+
+This replaces the current run's directional prompts and layout-guide inputs with a three-key-pose contract. For bipeds the poses are left foot forward, legs passing under the body, and right foot forward. Other locomotion types use three equivalent movement phases. Do not generate eight independent running frames.
+
+After the selected three-pose `running-right` image has been copied to `decoded/running-right.png`, expand it before running `hatch-pet` extraction or mirror derivation:
+
+```bash
+python "<make-pet-skin-skill-dir>/directional_running_adapter.py" expand \
+  --run-dir "<run-dir>" \
+  --state running-right
+```
+
+The adapter preserves the source under `decoded/key-poses/` and replaces the decoded row with the deterministic eight-frame `12321232` strip expected by `hatch-pet`. If asymmetry requires separately generating `running-left`, expand it with the same command and `--state running-left`. A mirrored left row is derived only after the right row has been expanded.
+
 ## Required Gates
 
 Every accepted action row must have:
@@ -68,6 +87,10 @@ For `/goal` runs, treat visual QA as an acceptance gate separate from structural
 Run a final semantic anatomy pass before calling a row visually accepted. Check for duplicate tails, extra or missing limbs, duplicated ears, duplicated horns or wings, ghost props or accessories, and anatomy changes that appear in only one frame. When the important body part is small, create or request a zoomed body-part crop contact sheet before accepting the package.
 
 When `running-left` is mirrored, require framewise mirroring from extracted `frames/running-right/*.png` into extracted `frames/running-left/*.png`. Do not accept raw-strip mirroring from `decoded/running-right.png` as package output. If the row is not a mirror, record the explicit non-mirror approval reason.
+
+Require structural proof that directional rows use three key poses, follow `12321232`, and reuse pixel-identical images for repeated pose numbers. A separately generated asymmetric `running-left` follows the same contract.
+
+Require `qa/directional-running-adapter.json` for newly generated directional rows. Do not continue to final packaging if the adapter report is missing or does not report `repeated_poses_pixel_identical: true`.
 
 Record repairs in `qa/run-summary.json` when applicable:
 

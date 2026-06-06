@@ -30,10 +30,19 @@ Avoid:
 
 Purpose: directional drag movement to the right.
 
-Default pattern: eight frames with a simple readable travel cadence. For small pets, readable movement is more important than anatomical foot perfection.
+Default pattern for bipeds: generate one three-cell strip containing only three key poses:
+
+1. Left foot forward.
+2. Legs crossing or passing under the body.
+3. Right foot forward.
+
+Extract those three poses, then assemble the eight final frames deterministically as `12321232`. Repeated pose numbers must reuse the same extracted image; do not ask the image model to generate eight separate frames.
+
+Quadrupeds, legless, wheeled, floating, and other characters should use three equivalent readable locomotion phases instead of forced biped foot positions, then use the same `12321232` assembly.
 
 Avoid:
 
+- Eight independently generated running frames.
 - Speed lines.
 - Dust.
 - Floor shadows.
@@ -52,6 +61,8 @@ Generate independently only when:
 - The character has non-mirrorable readable marks.
 - A one-sided tool, limb, scar, or accessory would become wrong.
 - The user explicitly chooses redraw over consistency.
+
+An independently generated `running-left` must also use three key poses and deterministic `12321232` assembly.
 
 ## `waving`
 

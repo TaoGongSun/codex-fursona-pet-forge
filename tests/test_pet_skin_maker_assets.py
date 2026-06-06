@@ -28,6 +28,8 @@ def test_pet_skin_reference_docs_exist_and_cover_goal_mode():
             "duplicate tails",
             "human_review_items",
             "manual_frame_repairs",
+            "12321232",
+            "three key poses",
         ],
         "pet-skin-action-defaults.md": [
             "idle",
@@ -39,6 +41,9 @@ def test_pet_skin_reference_docs_exist_and_cover_goal_mode():
             "waiting",
             "running",
             "review",
+            "12321232",
+            "left foot forward",
+            "right foot forward",
         ],
         "pet-skin-quality-checklist.md": [
             "transparent 192x208 animated GIF",
@@ -54,6 +59,8 @@ def test_pet_skin_reference_docs_exist_and_cover_goal_mode():
             "magenta",
             "zoomed body-part crop",
             "user approval",
+            "pixel-identical",
+            "12321232",
         ],
         "pet-generation-handoff.md": [
             "run directory",
@@ -100,6 +107,12 @@ def test_make_pet_skin_skill_routes_goal_mode_and_dependency_preflight():
     assert "semantic anatomy" in content
     assert "duplicate tails" in content
     assert "zoomed body-part crop" in content
+    assert "three key poses" in content
+    assert "12321232" in content
+    assert "directional_running_adapter.py" in content
+    assert "prepare-run" in content
+    assert "--state running-right" in content
+    assert "directional-running-adapter.json" in content
 
 
 def test_pet_generation_handoff_skill_is_structured_for_long_goal_runs():

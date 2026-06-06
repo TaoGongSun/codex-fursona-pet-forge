@@ -92,7 +92,11 @@ Default order:
 8. `running`
 9. `review`
 
-Generate `running-right` before `running-left`. Prefer deterministic framewise mirroring for `running-left` unless the character has important asymmetry that cannot be mirrored. Framewise mirroring means mirroring the already-extracted `frames/running-right/00.png` through `frames/running-right/07.png` into 192x208 `frames/running-left/*.png`; do not mirror an arbitrary raw `decoded/running-right.png` strip for accepted package output. If a generated or derived `running-left` is accepted, record whether it was a framewise mirror or an explicitly approved non-mirror row.
+Generate `running-right` before `running-left`. For directional running, generate one three-cell strip containing three key poses rather than eight independent frames. For bipeds these are left foot forward, legs passing under the body, and right foot forward. Other locomotion types use three equivalent readable movement phases. Extract the three poses and assemble the final eight frames deterministically as `12321232`; repeated pose numbers must reuse the same extracted image.
+
+Prefer deterministic framewise mirroring for `running-left` unless the character has important asymmetry that cannot be mirrored. Framewise mirroring means mirroring the already-assembled `frames/running-right/00.png` through `frames/running-right/07.png` into 192x208 `frames/running-left/*.png`; do not mirror an arbitrary raw strip for accepted package output. A separately generated `running-left` must follow the same three-key-pose and `12321232` contract. If a generated or derived `running-left` is accepted, record whether it was a framewise mirror or an explicitly approved non-mirror row.
+
+The installed `hatch-pet` skill remains external and unchanged. The repo-local `make-pet-skin/directional_running_adapter.py` adapts each prepared run: `prepare-run` replaces only that run's directional prompts and guides, while `expand` preserves the generated three-pose source under `decoded/key-poses/` and writes the eight-frame decoded strip that the existing `hatch-pet` extraction and packaging scripts expect.
 
 ## Row Acceptance
 
@@ -108,6 +112,8 @@ For every accepted row, produce:
 - Any semantic anatomy concerns such as duplicate tails, extra limbs, duplicated ears or horns, missing appendages, ghost props, or anatomy changes that appear in only one frame of a loop.
 - Optional zoomed body-part crop contact sheet when the character has important tails, wings, horns, hair, capes, or accessories that are hard to inspect at full contact-sheet scale.
 - For derived `running-left`, proof that each left frame equals the framewise mirror of the matching right frame, or an explicit non-mirror approval note.
+- For directional running, proof that the source contains three key poses, the final sequence is `12321232`, and repeated uses of each pose are pixel-identical.
+- For newly generated directional rows, `qa/directional-running-adapter.json`.
 
 Do not mark a row accepted from a raw row strip, frames sheet, contact sheet, or numeric metrics alone.
 
